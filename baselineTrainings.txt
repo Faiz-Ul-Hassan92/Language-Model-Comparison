@@ -24,3 +24,6 @@ Attention Heads      = 4
 Blocks               = 2
 FeedForwardDimension = 512
 
+
+
+Using Global Average Pooling instead of last token as CLS in transformer architecture.

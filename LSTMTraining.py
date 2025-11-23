@@ -23,12 +23,12 @@ with open('tokenizer/config.pkl', 'rb') as f:
     max_sequence_len = config['max_sequence_len']
 
 
-max_sequence_len = 20 #for baseline
+
 
 
 def build_lstm_model(vocab_size, max_sequence_len, embedding_dim=128, rnn_units=128, dropout=0.2):
     model = Sequential([
-        Embedding(vocab_size, embedding_dim, input_length=max_sequence_len-1),
+        Embedding(vocab_size, embedding_dim),
         LSTM(rnn_units, return_sequences=True),
         LSTM(rnn_units, return_sequences=False),
         Dropout(dropout),
@@ -108,7 +108,7 @@ def plot_history(history, optimizer_name):
     ax2.grid(True)
     
     plt.tight_layout()
-    plt.savefig(f'baselineLSTMTrain/lstm_{optimizer_name}_training.png', dpi=150)
+    plt.savefig(f'lstm/baseline/lstm_{optimizer_name}_training.png', dpi=150)
     plt.show()
 
 
@@ -140,7 +140,7 @@ for opt in optimizers:
     
     plot_history(history, opt)
     
-    model.save(f'baselineLSTMTrain/lstm_{opt}_model.keras')
+    model.save(f'lstm/baseline/lstm_{opt}_model.keras')
     print(f"Model saved as: lstm_{opt}_model.keras")
 
 
@@ -148,5 +148,5 @@ for opt in optimizers:
 for name, res in results.items():
     print(f"{name}: Perplexity={res['test_perplexity']:.2f}, Accuracy={res['test_accuracy']:.4f}, Time={res['training_time']:.2f}s")
 
-with open('baselineLSTMTrain/lstm_results.pkl', 'wb') as f:
+with open('lstm/baseline/lstm_results.pkl', 'wb') as f:
     pickle.dump(results, f)
