@@ -1,0 +1,26 @@
+Baseline Trainings first with these configurations:
+
+
+RNN/LSTM:
+
+Layers         = 2
+Dropout        = 0.2
+Batch          = 128
+SequenceLength = 20
+
+
+
+Learning Rate: 
+● Adam baseline: 0.001 
+● RMSprop baseline: 0.001 
+● SGD baseline: 0.01 
+
+
+
+
+Transformer:
+
+Attention Heads      = 4
+Blocks               = 2
+FeedForwardDimension = 512
+
