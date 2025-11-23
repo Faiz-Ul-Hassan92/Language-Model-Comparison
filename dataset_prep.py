@@ -16,6 +16,7 @@ print(f"Columns: {df.columns.tolist()}")
 print(df['content'][0])
 
 
+avg_words = 0
 
 lines = []
 for content in df['content']:
@@ -25,6 +26,7 @@ for content in df['content']:
             line = line.strip()
             if line:
                 lines.append(line)
+                avg_words += len(line)
 
 
 print(f"Total lines we have :{len(lines)}")
@@ -33,6 +35,10 @@ avg_size = len(lines)
 
 avg_size = avg_size/len(df)
 print(f"Avg Poem Size by lines: {avg_size}")
+
+
+
+print(f"Average words per poem : {avg_words/len(df)}")
 
 
 
@@ -67,10 +73,15 @@ for i in range(10,15):
 
 max_sequence_len = max([len(seq) for seq in sequences])
 
+
 print(max_sequence_len)
+max_sequence_len = 20 #baselines
+print(f"Fixing max sequence length to {max_sequence_len}")
 
 
 sequences = np.array(pad_sequences(sequences, maxlen=max_sequence_len, padding='pre'))
+#i just learnt this is just truncating and not removing longer sentences
+
 
 print(f"\nSequences shape after padding: {sequences.shape}")
 print(f"First padded sequence:\n{sequences[0]}")
