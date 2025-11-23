@@ -2,7 +2,7 @@ import numpy as np
 import pickle
 import tensorflow as tf
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Embedding, Dense, Dropout, LayerNormalization, MultiHeadAttention, GlobalAveragePooling1D
+from tensorflow.keras.layers import Input, Embedding, Dense, Dropout, LayerNormalization, MultiHeadAttention
 from tensorflow.keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 import time
@@ -83,7 +83,7 @@ def build_transformer_model(vocab_size, max_sequence_len, embedding_dim=128, num
     for _ in range(num_blocks):
         x = TransformerBlock(embedding_dim, num_heads, ff_dim, dropout)(x)
     
-    x = GlobalAveragePooling1D()(x)
+    x = x[:, -1, :] #fixed this from globalAveraging(Was giving bas results) to last token as embedding for generation
     x = Dropout(dropout)(x)
     outputs = Dense(vocab_size, activation='softmax')(x)
     
