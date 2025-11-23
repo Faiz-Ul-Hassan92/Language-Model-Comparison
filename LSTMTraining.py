@@ -124,7 +124,7 @@ for opt in optimizers:
     history, training_time = train_model(model, opt)
     metrics = evaluate_model(model, X_test, y_test)
     
-    results[f'LSTM{opt}'] = {
+    results[f'LSTM_{opt}'] = {
         'optimizer': opt,
         'training_time': training_time,
         'test_loss': metrics['loss'],
