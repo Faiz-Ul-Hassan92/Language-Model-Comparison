@@ -177,7 +177,7 @@ results = {}
 
 for opt in optimizers:
     print(f"Transformer with {opt.upper()}")
-    
+    tf.keras.backend.clear_session()
     model = build_transformer_model(vocab_size, max_sequence_len)
     history, training_time = train_model(model, opt)
     metrics = evaluate_model(model, X_test, y_test)
